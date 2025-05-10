@@ -1,8 +1,10 @@
 package io.dev.lecture.infra.Entity;
 
+import io.dev.lecture.domain.model.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,4 +21,13 @@ public class UserEntity extends BaseTimeEntity{
     @OneToMany(mappedBy = "user")
     private List<RegistrationEntity> Registration = new ArrayList<>();
 
+    public User toUser() {
+        return new User(id, username, getCreatedAt(), getUpdatedAt());
+    }
+
+    public UserEntity(Long id, String username, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        super(createdAt, updatedAt);
+        this.id = id;
+        this.username = username;
+    }
 }
