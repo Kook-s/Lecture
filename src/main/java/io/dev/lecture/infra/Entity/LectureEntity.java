@@ -6,9 +6,9 @@ import lombok.Getter;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+@Entity(name = "lecture")
 @Getter
-public class Lecture extends BaseTimeEntity{
+public class LectureEntity extends BaseTimeEntity{
 
     @Id
     @GeneratedValue
@@ -17,8 +17,8 @@ public class Lecture extends BaseTimeEntity{
     private String title;
 
     @OneToMany(mappedBy = "lecture")
-    private List<Registration> registrations = new ArrayList<>();
+    private List<RegistrationEntity> registrations = new ArrayList<>();
 
     @OneToMany(mappedBy = "lecture")
-    private List<LectureSchedule> lectureSchedules = new ArrayList<>();
+    private List<LectureScheduleEntity> lectureSchedules = new ArrayList<>();
 }
