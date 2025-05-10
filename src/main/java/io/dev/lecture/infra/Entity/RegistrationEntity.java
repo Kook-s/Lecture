@@ -3,9 +3,9 @@ package io.dev.lecture.infra.Entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 
-@Entity
+@Entity(name = "registration")
 @Getter
-public class Registration extends BaseTimeEntity{
+public class RegistrationEntity extends BaseTimeEntity{
 
     @Id
     @GeneratedValue
@@ -13,10 +13,10 @@ public class Registration extends BaseTimeEntity{
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
-    private Member member;
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "lecture_id")
-    private Lecture lecture;
+    private LectureEntity lecture;
 }

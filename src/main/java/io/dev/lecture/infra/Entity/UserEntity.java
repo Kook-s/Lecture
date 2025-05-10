@@ -6,17 +6,17 @@ import lombok.Getter;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+@Entity(name = "users")
 @Getter
-public class Member extends BaseTimeEntity{
+public class UserEntity extends BaseTimeEntity{
 
     @Id
     @GeneratedValue
-    @Column(name = "member_id")
+    @Column(name = "user_id")
     private Long id;
     private String username;
 
-    @OneToMany(mappedBy = "member")
-    private List<Registration> Registration = new ArrayList<>();
+    @OneToMany(mappedBy = "user")
+    private List<RegistrationEntity> Registration = new ArrayList<>();
 
 }

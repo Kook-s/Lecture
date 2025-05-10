@@ -5,9 +5,9 @@ import lombok.Getter;
 
 import java.time.LocalDateTime;
 
-@Entity
+@Entity(name = "schedule")
 @Getter
-public class LectureSchedule extends  BaseTimeEntity{
+public class LectureScheduleEntity extends  BaseTimeEntity{
 
     @Id
     @GeneratedValue
@@ -21,6 +21,6 @@ public class LectureSchedule extends  BaseTimeEntity{
 
     @ManyToOne
     @JoinColumn(name = "lecture_id")
-    private Lecture lecture;
+    private LectureEntity lecture;
 
 }
