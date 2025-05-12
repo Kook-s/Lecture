@@ -45,7 +45,11 @@ public class LectureRepositoryImpl implements LectureRepository {
                 .selectFrom(lectureEntity)
                 .leftJoin(lectureEntity.lectureSchedules, lectureScheduleEntity)
                 .fetchJoin()
-                .where(lectureEntity.id.eq(lectureId))
+                .where(lectureEntity.id.eq(lectureId)
+                        .and(lectureScheduleEntity.currentCapacity.
+                                lt(lectureScheduleEntity.maxCapacity)
+                        )
+                )
                 .fetchOne();
 
         return Optional.ofNullable(result).map(LectureEntity::toLecture);
