@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
-@Builder
 public record Lecture(
         Long lectureId,
         String title,
@@ -13,8 +13,6 @@ public record Lecture(
         LocalDateTime createAt,
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
         LocalDateTime updateAt,
-        Long registrationId,
-        Long lectureScheduleId
+        List<Schedule> schedules
 ) {
-
 }

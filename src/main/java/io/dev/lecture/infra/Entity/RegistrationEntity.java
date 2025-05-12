@@ -19,4 +19,16 @@ public class RegistrationEntity extends BaseTimeEntity{
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "lecture_id")
     private LectureEntity lecture;
+
+    public RegistrationEntity(UserEntity user, LectureEntity lecture) {
+        this.user = user;
+        this.lecture = lecture;
+
+        user.getRegistration().add(this);
+        lecture.getRegistrations().add(this);
+    }
+
+    public RegistrationEntity() {
+
+    }
 }

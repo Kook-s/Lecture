@@ -18,7 +18,7 @@ import java.time.format.DateTimeFormatter;
 @Profile({"local", "test"})
 @Component
 @RequiredArgsConstructor
-public class InitUser {
+public class InitDataLoad {
 
     private final InitUserService initUserService;
 
@@ -49,6 +49,7 @@ public class InitUser {
             em.persist(redis);
 
             em.persist(new LectureScheduleEntity(5, LocalDateTime.parse("2025-05-10 13:00:00", formatter), spring));
+            em.persist(new LectureScheduleEntity(0, LocalDateTime.parse("2025-05-12 13:00:00", formatter), spring));
             em.persist(new LectureScheduleEntity(5, LocalDateTime.parse("2025-05-10 13:00:00", formatter), jpa));
             em.persist(new LectureScheduleEntity(10, LocalDateTime.parse("2025-05-10 13:00:00", formatter), db));
             em.persist(new LectureScheduleEntity(10, LocalDateTime.parse("2025-05-10 13:00:00", formatter), redis));

@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -18,10 +19,10 @@ public class UserRepositoryImpl implements UserRepository {
     private final UserJpaRepository userJpaRepository;
 
     @Override
-    public User getByUserid(long id) {
+    public Optional<User> getByUserId(long id) {
         return userJpaRepository.findById(id)
-                .map(UserEntity::toUser)
-                .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+                .map(UserEntity::toUser);
+//                .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
     }
 
     @Override
