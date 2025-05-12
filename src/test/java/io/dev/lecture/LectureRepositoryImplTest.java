@@ -1,8 +1,10 @@
 package io.dev.lecture;
 
 import io.dev.lecture.domain.model.Lecture;
+import io.dev.lecture.domain.model.Registration;
 import io.dev.lecture.domain.model.Schedule;
 import io.dev.lecture.domain.repository.LectureRepository;
+import io.dev.lecture.domain.repository.RegistrationRepository;
 import io.dev.lecture.infra.Entity.LectureEntity;
 import io.dev.lecture.infra.Entity.LectureScheduleEntity;
 import io.dev.lecture.support.CustomException;
@@ -31,26 +33,32 @@ class LectureRepositoryImplTest {
     LectureRepository lectureRepository;
 
     @Autowired
+    RegistrationRepository registrationRepository;
+
+    @Autowired
     EntityManager em;
 
     @Test
     void 강의와_강의상세_조회_정상작동() {
 
-        List<LectureEntity> resultList = em.createQuery("SELECT l FROM lecture  l", LectureEntity.class).getResultList();
-        System.out.println("resultList = " + resultList);
+        Registration registration = registrationRepository.findByRegistration(1L).get();
+        System.out.println("registration = " + registration);
 
-        LectureEntity result = em.find(LectureEntity.class, 1L);
+//        List<LectureEntity> resultList = em.createQuery("SELECT l FROM lecture  l", LectureEntity.class).getResultList();
+//        System.out.println("resultList = " + resultList);
+//
+//        LectureEntity result = em.find(LectureEntity.class, 1L);
         Lecture lecture = lectureRepository.findById(1L)
                 .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
-        System.out.println("result = " + lecture.schedules());
-
-
-        for (LectureScheduleEntity lectureSchedule : result.getLectureSchedules()) {
-            System.out.println("lectureSchedule.id = " + lectureSchedule.getId());
-            System.out.println("lectureSchedule.current = " + lectureSchedule.getCurrentCapacity());
-            System.out.println("lectureSchedule.max = " + lectureSchedule.getMaxCapacity());
-
-        }
+//        System.out.println("result = " + lecture.schedules());
+//
+//
+//        for (LectureScheduleEntity lectureSchedule : result.getLectureSchedules()) {
+//            System.out.println("lectureSchedule.id = " + lectureSchedule.getId());
+//            System.out.println("lectureSchedule.current = " + lectureSchedule.getCurrentCapacity());
+//            System.out.println("lectureSchedule.max = " + lectureSchedule.getMaxCapacity());
+//
+//        }
 
 
     }
