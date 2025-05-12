@@ -1,5 +1,7 @@
 package io.dev.lecture.infra.Entity;
 
+import io.dev.lecture.domain.model.Registration;
+import io.dev.lecture.domain.model.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 
@@ -20,6 +22,9 @@ public class RegistrationEntity extends BaseTimeEntity{
     @JoinColumn(name = "lecture_id")
     private LectureEntity lecture;
 
+    public RegistrationEntity() {
+    }
+
     public RegistrationEntity(UserEntity user, LectureEntity lecture) {
         this.user = user;
         this.lecture = lecture;
@@ -28,7 +33,12 @@ public class RegistrationEntity extends BaseTimeEntity{
         lecture.getRegistrations().add(this);
     }
 
-    public RegistrationEntity() {
+    public Registration toRegistration() {
 
+        return new Registration(
+                this.id,
+                this.user.getId(),
+                this.lecture.getId()
+        );
     }
 }

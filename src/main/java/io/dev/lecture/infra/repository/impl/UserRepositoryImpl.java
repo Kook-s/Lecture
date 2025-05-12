@@ -22,7 +22,6 @@ public class UserRepositoryImpl implements UserRepository {
     public Optional<User> getByUserId(long id) {
         return userJpaRepository.findById(id)
                 .map(UserEntity::toUser);
-//                .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
     }
 
     @Override
