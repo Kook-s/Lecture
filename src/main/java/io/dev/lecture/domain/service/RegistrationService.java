@@ -5,6 +5,7 @@ import io.dev.lecture.domain.repository.RegistrationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -13,8 +14,8 @@ public class RegistrationService {
 
     private final RegistrationRepository registrationRepository;
 
-    public Registration getRegistration (long registrationId) {
-        return registrationRepository.findByRegistration(registrationId).orElseThrow();
+    public List<Registration> getRegistration (long userId) {
+        return registrationRepository.findByRegistration(userId);
     }
 
     public void saveRegistration (long userId, long lectureId) {

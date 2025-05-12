@@ -13,6 +13,8 @@ import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 import static io.dev.lecture.infra.Entity.QLectureEntity.lectureEntity;
@@ -40,19 +42,41 @@ public class LectureRepositoryImpl implements LectureRepository {
     }
 
     @Override
+    public List<Lecture> findAllByIds(List<Long> lectureIds) {
+        return lectureJpaRepository.findAllById(lectureIds).stream()
+                .map(LectureEntity::toLecture)
+                .toList();
+    }
+
+    @Override
     public Optional<Lecture> findAvailableLectureById(Long lectureId) {
         LectureEntity result = queryFactory
                 .selectFrom(lectureEntity)
                 .leftJoin(lectureEntity.lectureSchedules, lectureScheduleEntity)
                 .fetchJoin()
-                .where(lectureEntity.id.eq(lectureId)
-                        .and(lectureScheduleEntity.currentCapacity.
-                                lt(lectureScheduleEntity.maxCapacity)
-                        )
+                .where(lectureEntity.id.eq(lectureId),
+                        lectureScheduleEntity.currentCapacity.lt(lectureScheduleEntity.maxCapacity)
                 )
                 .fetchOne();
 
         return Optional.ofNullable(result).map(LectureEntity::toLecture);
+    }
+
+    @Override
+    public List<Lecture> findAvailableTimeLectureById(LocalDateTime date) {
+        List<LectureEntity> result = queryFactory
+        .selectFrom(lectureEntity)
+        .join(lectureEntity.lectureSchedules, lectureScheduleEntity)
+        .fetchJoin()
+        .where(
+                lectureScheduleEntity.startTime.gt(date),
+                lectureScheduleEntity.currentCapacity.lt(lectureScheduleEntity.maxCapacity)
+        )
+        .fetch();
+
+        return result.stream()
+                .map(LectureEntity::toLecture)
+                .toList();
     }
 
     @Override

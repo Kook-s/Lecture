@@ -7,6 +7,11 @@ import io.dev.lecture.support.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class LectureService {
@@ -25,5 +30,13 @@ public class LectureService {
 
     public void insertLecture(long scheduleId) {
         lectureRepository.increaseLecture(scheduleId);
+    }
+
+    public List<Lecture> getLectureByIds(List<Long> lectureIds) {
+        return lectureRepository.findAllByIds(lectureIds);
+    }
+
+    public List<Lecture> getAvailableTimeLecture(LocalDateTime date) {
+        return lectureRepository.findAvailableTimeLectureById(date);
     }
 }
