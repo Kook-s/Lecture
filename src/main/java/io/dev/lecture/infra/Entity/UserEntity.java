@@ -21,13 +21,21 @@ public class UserEntity extends BaseTimeEntity{
     @OneToMany(mappedBy = "user")
     private List<RegistrationEntity> Registration = new ArrayList<>();
 
-    public User toUser() {
-        return new User(id, username, getCreatedAt(), getUpdatedAt());
+    public UserEntity() {
+    }
+
+    public UserEntity(String username,LocalDateTime createdAt, LocalDateTime updatedAt) {
+        super(createdAt, updatedAt);
+        this.username = username;
     }
 
     public UserEntity(Long id, String username, LocalDateTime createdAt, LocalDateTime updatedAt) {
         super(createdAt, updatedAt);
         this.id = id;
         this.username = username;
+    }
+
+    public User toUser() {
+        return new User(id, username, getCreatedAt(), getUpdatedAt());
     }
 }

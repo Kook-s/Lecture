@@ -1,18 +1,17 @@
 package io.dev.lecture.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Builder;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
-public record Lecture(
-        Long lectureId,
-        String title,
+public record Schedule(
+        Long scheduleId,
+        int maxCapacity,
+        int currentCapacity,
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-        LocalDateTime createAt,
+        LocalDateTime startTime,
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-        LocalDateTime updateAt,
-        List<Schedule> schedules
+        LocalDateTime endTime,
+        Long lectureId
 ) {
 }
