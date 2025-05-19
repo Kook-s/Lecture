@@ -60,10 +60,12 @@ public class LectureRepositoryImpl implements LectureRepository {
     }
 
     @Override
-    public void increaseLecture(long scheduleId) {
+    public int increaseLecture(long scheduleId) {
         ScheduleEntity schedule = scheduleJpaRepository.findById(scheduleId)
                 .orElseThrow(() -> new CustomException(ErrorCode.LECTURE_NOT_FOUND));
 
         schedule.increaseCapacity();
+
+        return schedule.getCurrentCapacity();
     }
 }

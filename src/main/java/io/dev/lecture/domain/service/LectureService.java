@@ -25,7 +25,7 @@ public class LectureService {
         return lectureRepository.findAvailableById(date);
     }
 
-    public void increaseCapacity(long id) {
-        lectureRepository.increaseLecture(id);
+    public int increaseCapacity(long id) {
+        return lectureRepository.increaseLecture(id);
     }
 }
