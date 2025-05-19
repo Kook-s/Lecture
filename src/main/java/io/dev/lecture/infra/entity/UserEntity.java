@@ -1,10 +1,12 @@
 package io.dev.lecture.infra.entity;
 
+import io.dev.lecture.domain.model.User;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +14,7 @@ import java.util.List;
 @Table(name = "users")
 @Getter
 @NoArgsConstructor
-public class User extends BaseTimeEntity{
+public class UserEntity extends BaseTimeEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,11 +23,10 @@ public class User extends BaseTimeEntity{
     private String username;
 
     @OneToMany(mappedBy = "user")
-    private List<Registration> registrations= new ArrayList<>();
+    private List<RegistrationEntity> registrations= new ArrayList<>();
 
-    @Builder
-    public User(String name) {
-        this.username = name;
+    public User toUser() {
+        return new User(id, username, getCreatedAt(), getUpdatedAt());
     }
 
 }

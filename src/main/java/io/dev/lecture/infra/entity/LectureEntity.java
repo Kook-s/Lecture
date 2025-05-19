@@ -1,5 +1,6 @@
 package io.dev.lecture.infra.entity;
 
+import io.dev.lecture.domain.model.Lecture;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +12,7 @@ import java.util.List;
 @Table(name = "lecture")
 @Getter
 @NoArgsConstructor
-public class Lecture {
+public class LectureEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,8 +21,10 @@ public class Lecture {
     private String title;
 
     @OneToMany(mappedBy = "lecture")
-    private List<Schedule> schedules = new ArrayList<>();
+    private List<ScheduleEntity> schedules = new ArrayList<>();
 
-
+    public Lecture toLecture() {
+        return new Lecture(id, title);
+    }
 
 }

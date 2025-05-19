@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "registration")
 @Getter
 @NoArgsConstructor
-public class Registration extends BaseTimeEntity{
+public class RegistrationEntity extends BaseTimeEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,9 +17,9 @@ public class Registration extends BaseTimeEntity{
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private User user;
+    private UserEntity user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "schedule_id")
-    private Schedule schedule;
+    private ScheduleEntity schedule;
 }
