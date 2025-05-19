@@ -30,6 +30,6 @@ public class Schedule extends BaseTimeEntity {
     private List<Registration> registrations = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "schedule_id")
-    private Schedule schedule;
+    @JoinColumn(name = "lecture_id")
+    private Lecture lecture;
 }
