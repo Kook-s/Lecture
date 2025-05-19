@@ -11,5 +11,6 @@ public interface LectureRepository {
 
     Optional<Schedule> findById(long id);
     List<Schedule> findAvailableById(LocalDateTime date);
+    List<Schedule> findAllLectures(List<Long> lectureIds);
     int increaseLecture(long scheduleId);
 }

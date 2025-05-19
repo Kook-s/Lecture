@@ -3,6 +3,7 @@ package io.dev.lecture.infra.repository.impl;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import io.dev.lecture.domain.model.Schedule;
 import io.dev.lecture.domain.repository.LectureRepository;
+import io.dev.lecture.infra.entity.LectureEntity;
 import io.dev.lecture.infra.entity.QLectureEntity;
 import io.dev.lecture.infra.entity.QScheduleEntity;
 import io.dev.lecture.infra.entity.ScheduleEntity;
@@ -55,6 +56,14 @@ public class LectureRepositoryImpl implements LectureRepository {
                 .fetch();
 
         return result.stream()
+                .map(ScheduleEntity::toSchedule)
+                .toList();
+    }
+
+    @Override
+    public List<Schedule> findAllLectures(List<Long> lectureIds) {
+        return scheduleJpaRepository.findAllById(lectureIds)
+                .stream()
                 .map(ScheduleEntity::toSchedule)
                 .toList();
     }

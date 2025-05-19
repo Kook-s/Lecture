@@ -25,7 +25,12 @@ public class LectureService {
         return lectureRepository.findAvailableById(date);
     }
 
+    public List<Schedule> getAllLectures(List<Long> lectureIds) {
+        return lectureRepository.findAllLectures(lectureIds);
+    }
+
     public int increaseCapacity(long id) {
         return lectureRepository.increaseLecture(id);
     }
+
 }
