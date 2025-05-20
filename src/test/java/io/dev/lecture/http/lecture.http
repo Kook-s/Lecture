@@ -1,0 +1,11 @@
+###
+POST http://localhost:8080/v1/lecture/register?userId=1&scheduleId=10
+Content-Type: application/json
+
+####
+GET http://localhost:8080/v1/lecture/available?date=2022-06-01T10:00:00
+Content-Type: application/json
+
+###
+GET http://localhost:8080/v1/lecture/registration/1
+Content-Type: application/json
