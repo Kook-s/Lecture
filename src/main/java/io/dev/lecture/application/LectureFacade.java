@@ -26,16 +26,18 @@ public class LectureFacade {
 
     @Transactional
     public RegistrationResponse registrationLecture(long userId, long lectureId) {
-        User user = userService.getUser(userId);
+        // 강의 중복 여부 처리
+        registrationService.checkRegistration(userId, lectureId);
+
         Schedule lecture = lectureService.getLecture(lectureId);
 
-        registrationService.register(user.id(), lecture.scheduleId());
+        registrationService.register(userId, lecture.scheduleId());
+
         int currentCapacity = lectureService.increaseCapacity(lecture.scheduleId());
 
-        return new RegistrationResponse(user.id(), lecture.scheduleId(), currentCapacity);
+        return new RegistrationResponse(userId, lecture.scheduleId(), currentCapacity);
     }
 
-    @Transactional
     public List<ScheduleResponse> AvailableLecture(LocalDateTime date) {
         List<Schedule> result = lectureService.getAvailableLectures(date);
 
@@ -51,7 +53,6 @@ public class LectureFacade {
                 .toList();
     }
 
-    @Transactional
     public List<ScheduleResponse> getRegisteredLectures(long userId) {
         User user = userService.getUser(userId);
         List<Long> scheduleIds = registrationService.getRegistrations(userId)

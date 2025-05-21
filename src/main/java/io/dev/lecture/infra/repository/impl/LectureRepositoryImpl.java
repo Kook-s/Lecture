@@ -11,6 +11,7 @@ import io.dev.lecture.infra.repository.LectureJpaRepository;
 import io.dev.lecture.infra.repository.ScheduleJpaRepository;
 import io.dev.lecture.support.CustomException;
 import io.dev.lecture.support.ErrorCode;
+import jakarta.persistence.LockModeType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -38,6 +39,7 @@ public class LectureRepositoryImpl implements LectureRepository {
                 .join(scheduleEntity.lecture, lectureEntity)
                 .fetchJoin()
                 .where(scheduleEntity.id.eq(id))
+                .setLockMode(LockModeType.PESSIMISTIC_WRITE)
                 .fetchOne();
 
         return Optional.ofNullable(result).map(ScheduleEntity::toSchedule);

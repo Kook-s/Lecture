@@ -9,4 +9,5 @@ public interface RegistrationRepository {
 
     List<Registration> findById(long userId);
     void save(long userId, long scheduleId);
+    boolean checkRegistration(long userId, long scheduleId);
 }

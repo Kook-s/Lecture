@@ -39,4 +39,9 @@ public class RegistrationRepositoryImpl implements RegistrationRepository {
 
         registrationJpaRepository.save(new RegistrationEntity(user, schedule));
     }
+
+    @Override
+    public boolean checkRegistration(long userId, long scheduleId) {
+        return registrationJpaRepository.findByUserIdAndScheduleId(userId, scheduleId).isPresent();
+    }
 }
