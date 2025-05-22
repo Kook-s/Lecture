@@ -1,7 +1,8 @@
 package io.dev.lecture.domain.service;
 
+import io.dev.lecture.domain.model.User;
 import io.dev.lecture.domain.repository.UserRepository;
-import io.dev.lecture.infra.entity.User;
+import io.dev.lecture.infra.entity.UserEntity;
 import io.dev.lecture.support.CustomException;
 import io.dev.lecture.support.ErrorCode;
 import lombok.RequiredArgsConstructor;

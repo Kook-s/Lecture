@@ -1,8 +1,8 @@
 package io.dev.lecture.domain.repository;
 
-import io.dev.lecture.infra.entity.User;
+import io.dev.lecture.domain.model.User;
+import io.dev.lecture.infra.entity.UserEntity;
 
-import javax.swing.text.html.Option;
 import java.util.Optional;
 
 public interface UserRepository {
