@@ -1,10 +1,9 @@
 package io.dev.lecture.infra.repository.impl;
 
+import io.dev.lecture.domain.model.User;
 import io.dev.lecture.domain.repository.UserRepository;
-import io.dev.lecture.infra.entity.User;
+import io.dev.lecture.infra.entity.UserEntity;
 import io.dev.lecture.infra.repository.UserJpaRepository;
-import io.dev.lecture.support.CustomException;
-import io.dev.lecture.support.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -18,6 +17,6 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public Optional<User> findById(long userId) {
-        return userJpaRepository.findById(userId);
+        return userJpaRepository.findById(userId).map(UserEntity::toUser);
     }
 }
